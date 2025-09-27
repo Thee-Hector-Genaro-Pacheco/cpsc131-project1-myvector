@@ -1,248 +1,178 @@
+/******************************************************
+ * Project 1 - My Vector
+ * Name: Hector Pacheco
+ * CWID: 000000000
+ * Email: student@csu.fullerton.edu
+ *****************************************************/
 
 /**
- * TODO: Complete this class!
+ * MyVector.hpp
+ * CPSC131 - Dynamic vector implementation
  */
-
-
-/// Your welcome
-#include <assert.h>
-#include <iostream>
-#include <string>
+#pragma once
+#include <stdexcept>   // std::range_error
+#include <algorithm>   // std::max
+#include <new>         // placement new
 
 namespace CPSC131::MyVector
 {
 
-	//
-	template <typename T>
-	class MyVector
-	{
-		public:
-			
-			/*******************
-			 * Static constants
-			 ******************/
-			
-			/// Default capacity
-			static constexpr size_t DEFAULT_CAPACITY = 64;
-			
-			/// Minimum capacity
-			static constexpr size_t MINIMUM_CAPACITY = 8;
-			
-			/*****************************
-			 * Constructors / Destructors
-			 ****************************/
-			
-			/// Normal constructor
-			MyVector(size_t capacity = MyVector::DEFAULT_CAPACITY)
-			{
-				// TODO: Your code here
-			}
-			
-			/// Copy constructor
-			MyVector(const MyVector& other)
-			{
-				// TODO: Your code here
-			}
-			
-			/**
-			 * Destructor
-			 * Cleanup here.
-			 */
-			~MyVector()
-			{
-				// TODO: Your code here
-			}
-			
-			/************
-			 * Operators
-			 ************/
-			
-			///	Assignment operator
-			MyVector& operator=(const MyVector& rhs)
-			{
-				// TODO: Your code here
-				
-				return *this;
-			}
-			
-			/// Operator overload to at()
-			T& operator[](size_t index) const
-			{
-				// TODO: Your code here
-				
-				//	erase me
-				return *(new T());
-			}
-			
-			/************
-			 * Accessors
-			 ************/
-			
-			/// Return a raw pointer to the elements_ array
-			T* elements()
-			{
-				// TODO: Your code here
-				
-				//	erase me
-				return *(new T());
-			}
-			
-			/// Return the number of valid elements in our data
-			size_t size() const
-			{
-				// TODO: Your code here
-				
-				return 0;
-			}
-			
-			/// Return the capacity of our internal array
-			size_t capacity() const
-			{
-				// TODO: Your code here
-				
-				return 0;
-			}
-			
-			/**
-			 * Check whether our vector is empty
-			 * Return true if we have zero elements in our array (regardless of capacity)
-			 * Otherwise, return false
-			 */
-			bool empty() const
-			{
-				// TODO: Your code here
-				
-				return false;
-			}
-			
-			/// Return a reference to the element at an index
-			T& at(size_t index) const
-			{
-				// TODO: Your code here
-				
-				//	erase me
-				return *(new T());
-			}
-			
-			/***********
-			 * Mutators
-			 ***********/
-			
-			/**
-			 * Reserve capacity in advance, if our capacity isn't currently large enough.
-			 * Useful if we know we're about to add a large number of elements,
-			 *   and we'd like to avoid the overhead of many internal changes to capacity.
-			 */
-			void reserve(size_t capacity)
-			{
-				// TODO: Your code here
-			}
-			
-			/**
-			 * Set an element at an index.
-			 * Throws range error if outside the size boundary.
-			 * Returns a reference to the newly set element (not the original)
-			 */
-			T& set(size_t index, const T& element)
-			{
-				// TODO: Your code here
-				
-				//	erase me
-				return *(new T());
-			}
-			
-			/**
-			 * Add an element onto the end of our vector.
-			 * Returns a reference to the newly inserted element.
-			 */
-			T& push_back(const T& element)
-			{
-				// TODO: Your code here
-				
-				//	erase me
-				return *(new T());
-			}
-			
-			/**
-			 * Remove the last element in our vector.
-			 * Should throw std::range_error if the vector is already empty.
-			 * Returns a copy of the element removed.
-			 */
-			T pop_back()
-			{
-				// TODO: Your code here
-				
-				//	erase me
-				return *(new T());
-			}
-			
-			/**
-			 * Insert an element at some index in our vector
-			 * 
-			 * Example:
-			 * 	 Insert a 9 at index 2
-			 *   Contents before: [6, 2, 7, 4, 3]
-			 *   Contents after:  [6, 2, 9, 7, 4, 3]
-			 * 
-			 * Returns a reference to the newly added element (not the original).
-			 */
-			T& insert(size_t index, const T& element)
-			{
-				// TODO: Your code here
-				
-				//	erase me
-				return *(new T());
-			}
-			
-			/**
-			 * Erase one element in our vector at the specified index
-			 * 
-			 * Throws std::range_error if the index is out of bounds.
-			 * 
-			 * Example:
-			 *   Erase index 2
-			 *   Contents before: [8, 4, 3, 9, 1]
-			 *   Contents after:  [8, 4, 9, 1]
-			 * 
-			 * Returns a copy of the erased element.
-			 * Hint: call DTOR on original after making the copy.
-			 */
-			T erase(size_t index)
-			{
-				// TODO: Your code here
-				
-				//	erase me
-				return *(new T());
-			}
-			
-			/**
-			 * Removes all elements (i.e., size=0 and DTORs called)
-			 * 
-			 * Should also reset capacity, if needed
-			*/
-			void clear()
-			{
-				// TODO: Your code here
-			}
-		
-		/**
-		 * Begin private members and methods.
-		 * You may add your own private helpers here, if you wish.
-		*/
-		private:
-			
-			/// Number of valid elements currently in our vector
-			size_t size_ = 0;
-			
-			/// Capacity of our vector; The actual size of our internal array
-			size_t capacity_ = 0;
-			
-			/**
-			 * Our internal array of elements of type T.
-			 * Starts off as a null pointer.
-			 */
-			T* elements_ = nullptr;
-	};
+template <typename T>
+class MyVector
+{
+public:
+  // Constants
+  static constexpr size_t DEFAULT_CAPACITY = 64;
+  static constexpr size_t MINIMUM_CAPACITY = 8;
 
-}
+  // Constructors / Destructors
+  MyVector(size_t capacity = MyVector::DEFAULT_CAPACITY)
+  {
+    capacity_ = std::max(MINIMUM_CAPACITY, capacity);
+    elements_ = new T[capacity_];
+    size_ = 0;
+  }
 
+  MyVector(const MyVector& other)
+  {
+    capacity_ = other.capacity_;
+    size_     = other.size_;
+    elements_ = new T[capacity_];
+    for (size_t i = 0; i < size_; ++i) elements_[i] = other.elements_[i];
+  }
+
+  ~MyVector()
+  {
+    delete[] elements_;
+    elements_ = nullptr;
+    size_ = 0;
+    capacity_ = 0;
+  }
+
+  // Operators
+  MyVector& operator=(const MyVector& rhs)
+  {
+    if (this == &rhs) return *this;
+    T* buf = new T[rhs.capacity_];
+    for (size_t i = 0; i < rhs.size_; ++i) buf[i] = rhs.elements_[i];
+    delete[] elements_;
+    elements_ = buf;
+    size_     = rhs.size_;
+    capacity_ = rhs.capacity_;
+    return *this;
+  }
+
+  T& operator[](size_t index) const
+  {
+    return at(index);
+  }
+
+  // Accessors
+  T* elements() { return elements_; }
+  size_t size() const { return size_; }
+  size_t capacity() const { return capacity_; }
+  bool empty() const { return size_ == 0; }
+
+  T& at(size_t index) const
+  {
+    if (index >= size_) throw std::range_error("index out of range");
+    return elements_[index];
+  }
+
+  // Mutators
+  void reserve(size_t newCapacity)
+  {
+    if (newCapacity < size_) throw std::range_error("reserve below current size");
+    if (newCapacity > capacity_) reallocate_(newCapacity);
+  }
+
+  T& set(size_t index, const T& element)
+  {
+    if (index >= size_) throw std::range_error("set index out of range");
+    elements_[index].~T();
+    new (&elements_[index]) T(element);
+    return elements_[index];
+  }
+
+  T& push_back(const T& element)
+  {
+    grow_if_needed_();
+    elements_[size_] = element;
+    ++size_;
+    return elements_[size_ - 1];
+  }
+
+  T pop_back()
+  {
+    if (empty()) throw std::range_error("pop_back on empty vector");
+    T copy = elements_[size_ - 1];
+    --size_;
+    shrink_if_needed_();
+    return copy;
+  }
+
+  T& insert(size_t index, const T& element)
+  {
+    if (index > size_) throw std::range_error("insert index out of range");
+    grow_if_needed_();
+    for (size_t i = size_; i > index; --i) elements_[i] = elements_[i - 1];
+    elements_[index] = element;
+    ++size_;
+    return elements_[index];
+  }
+
+  T erase(size_t index)
+  {
+    if (index >= size_) throw std::range_error("erase index out of range");
+    T copy = elements_[index];
+    for (size_t i = index; i + 1 < size_; ++i) elements_[i] = elements_[i + 1];
+    --size_;
+    shrink_if_needed_();
+    return copy;
+  }
+
+  void clear()
+  {
+    delete[] elements_;
+    capacity_ = DEFAULT_CAPACITY;
+    elements_ = new T[capacity_];
+    size_ = 0;
+  }
+
+private:
+  // Helpers
+  void reallocate_(size_t newCap)
+  {
+    if (newCap < MINIMUM_CAPACITY) newCap = MINIMUM_CAPACITY;
+    T* buf = new T[newCap];
+    for (size_t i = 0; i < size_; ++i) buf[i] = elements_[i];
+    delete[] elements_;
+    elements_ = buf;
+    capacity_ = newCap;
+  }
+
+  void grow_if_needed_()
+  {
+    if (size_ >= capacity_) reallocate_(capacity_ * 2);
+  }
+
+  void shrink_if_needed_()
+  {
+    if (size_ == 0) {
+      if (capacity_ > MINIMUM_CAPACITY) reallocate_(MINIMUM_CAPACITY);
+      return;
+    }
+    if (capacity_ > MINIMUM_CAPACITY && (size_ * 3 + 3) <= capacity_) {
+      size_t newCap = capacity_ / 2;
+      if (newCap < MINIMUM_CAPACITY) newCap = MINIMUM_CAPACITY;
+      if (size_ * 3 > newCap) reallocate_(newCap);
+    }
+  }
+
+  // State
+  size_t size_ = 0;
+  size_t capacity_ = 0;
+  T* elements_ = nullptr;
+};
+
+} // namespace CPSC131::MyVector
