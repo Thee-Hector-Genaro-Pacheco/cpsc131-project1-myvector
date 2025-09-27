@@ -1,8 +1,8 @@
 /******************************************************
  * Project 1 - My Vector
  * Name: Hector Pacheco
- * CWID: 000000000
- * Email: student@csu.fullerton.edu
+ * CWID: 874602543
+ * Email: hector.pacheco@csu.fullerton.edu
  *****************************************************/
 
 /**
